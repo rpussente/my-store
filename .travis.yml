@@ -5,6 +5,11 @@ cache:
   yarn: true
   directories:
     - node_modules
+before_install:
+  - sudo apt-get install -y wine64
+addons:
+  apt:
+    update: true
 jobs:
   include:
     - stage: "Verify"
