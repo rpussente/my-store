@@ -11,4 +11,4 @@ jobs:
       script: yarn test
     - stage: "Build distributions"
       if: branch = master
-      script: yarn dist
+      script: yarn build && yarn dist
