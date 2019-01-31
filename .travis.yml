@@ -6,7 +6,10 @@ cache:
   directories:
     - node_modules
 before_install:
-  - sudo apt install --no-install-recommends -y wine
+  - sudo dpkg --add-architecture i386
+  - wget -qO- https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
+  - sudo apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+  - sudo apt-get install --install-recommends winehq-stable
 addons:
   apt:
     update: true
