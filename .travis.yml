@@ -11,4 +11,7 @@ jobs:
       script: yarn test
     - stage: "Build distributions"
       if: branch = master
-      script: ./dist.sh
+      script:
+        - yarn install build
+        - yarn build
+        - ./dist.sh
