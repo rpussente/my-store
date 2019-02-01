@@ -5,18 +5,10 @@ cache:
   yarn: true
   directories:
     - node_modules
-before_install:
-  - sudo dpkg --add-architecture i386
-  - wget -qO- https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
-  - sudo apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ trusty main'
-  - sudo apt-get install --install-recommends winehq-stable
-addons:
-  apt:
-    update: true
 jobs:
   include:
     - stage: "Verify"
       script: yarn test
     - stage: "Build distributions"
       if: branch = master
-      script: yarn build && yarn dist
+      script: ./dist.sh
