@@ -12,6 +12,6 @@ jobs:
     - stage: "Build distributions"
       if: branch = master
       script:
-        - yarn install build
+        - yarn install
         - yarn build
         - ./dist.sh
