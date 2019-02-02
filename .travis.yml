@@ -10,7 +10,4 @@ jobs:
     - stage: "Verify"
       script: yarn test
     - stage: "Build and Dist"
-      script:
-        - yarn install
-        - yarn build
-        - ./dist.sh
+      script: ./dist.sh
