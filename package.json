@@ -1,6 +1,6 @@
 {
   "name": "my-store",
-  "version": "0.1.0",
+  "version": "0.2.0-SNAPSHOT",
   "description": "A simple store controlling application",
   "author": "Rodolfo Pussente <rodolfo.pussente@gmail.com>",
   "license": "MIT",
