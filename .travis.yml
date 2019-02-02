@@ -1,13 +1,23 @@
 language: node_js
 node_js:
-  - 11
+- 11
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 jobs:
   include:
-    - stage: "Verify"
-      script: yarn test
-    - stage: "Build and Dist"
-      script: ./dist.sh
+  - stage: Verify
+    script: yarn test
+  - stage: Build and Dist
+    script: "./dist.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: PKC5nFSzv/fyhX2tiBfFO+5QPPTUeFindG4FBRtBrfQ4vYU3sgimq0b52XAwc0lG84dTekCl6OZIYibcaR2ekkvNHKERiF3X5xGyfsjYRtDtEAuCaxuksc4DL6ZK8nd2LRl4U+bfCnytemUgUtYF7KxqD1nNL+aOjjcn138GurhQevL66dhktMs8iJAkWRa+ON1442kW0VXmx/z5speVK8utpYKk+oG/YtS0YWBWSeIycptuIvuMNk2xHjEJ1ar3kJCfxTdNaIDbDGe+6/BZk0hbYCgkZ2y0y5R9XQCw6hMjf7IATFJqRUMMaX4qfhRTDdkZ1f3Hxt9DZHIg8wte108zDFsJnQQNJ1DMA3ZvHYxvQl6HOPzXjd3djdIZGKJwO3sZpBacrrnYLeMdfR8uxTuM9dzX6pUu04AzBFl+fDfGSxWkFampVQ5aixfrctSg+htOOe5wGotjRj3ALyczio74ekAdURbNRaf7yDynUkmK6JXbhOK+dKd92+Q5CA93ZqCg15vrbIApY54aUIoCx4zr83tXiIttKpkdsBozDL3b6ijqebbZcttAB9DgNJIOrzx+a/sM9FxfbJXwt3unu7OUO/u8v3n1wvfTVIDXtlLXVVNrKZ1RSK7s0sCGRVqEU+l4fRdSqO7ZRh0VlgMOee3KfwZPCCaaXChscBVbUE0=
+  file_glob: true
+  file: "dist/*.exe"
+  on:
+    repo: rpussente/my-store
+    branch: master
+    tags: true
