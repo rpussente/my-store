@@ -9,6 +9,9 @@ jobs:
   include:
     - stage: "Verify"
       script: yarn test
-    - stage: "Build distributions"
-      if: branch = master
+    - stage: "Build"
+      script:
+        - yarn install
+        - yarn build
+    - stage: "Dist"
       script: ./dist.sh
