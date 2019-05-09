@@ -15,18 +15,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems } from './listItems';
 import { styles } from './AppStyle';
 
+import { connect } from "react-redux";
+import { toggleMenu } from "./redux/actions";
+
 class App extends React.Component {
-  state = {
-    open: true,
-  };
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+  handleDrawerToggle = () => {
+    this.props.toggleMenu();
+  }
 
   render() {
     const { classes } = this.props;
@@ -37,16 +33,16 @@ class App extends React.Component {
         <CssBaseline />
         <AppBar
           position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+          className={classNames(classes.appBar, this.props.isMenuOpen && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+          <Toolbar disableGutters={!this.props.isMenuOpen} className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
+              onClick={this.handleDrawerToggle}
               className={classNames(
                 classes.menuButton,
-                this.state.open && classes.menuButtonHidden,
+                this.props.isMenuOpen && classes.menuButtonHidden,
               )}
             >
               <MenuIcon />
@@ -65,12 +61,12 @@ class App extends React.Component {
         <Drawer
           variant="permanent"
           classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !this.props.isMenuOpen && classes.drawerPaperClose),
           }}
-          open={this.state.open}
+          open={this.props.isMenuOpen}
         >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
+            <IconButton onClick={this.handleDrawerToggle}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -89,4 +85,12 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(App);
+const mapStateToProps = state => {
+  return { isMenuOpen: state.menu.open };
+}
+
+const mapDispatchToProps = {
+    toggleMenu
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));
