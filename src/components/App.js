@@ -19,12 +19,8 @@ import { connect } from "react-redux";
 import { toggleMenu } from "../redux/actions";
 
 class App extends React.Component {
-  handleDrawerToggle = () => {
-    this.props.toggleMenu();
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, toggleMenu } = this.props;
 
     return (
       <div className={classes.root}>
@@ -47,7 +43,7 @@ class App extends React.Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
+              onClick={toggleMenu}
               className={classNames(
                 classes.menuButton,
                 this.props.isMenuOpen && classes.menuButtonHidden
@@ -77,7 +73,7 @@ class App extends React.Component {
           open={this.props.isMenuOpen}
         >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerToggle}>
+            <IconButton onClick={toggleMenu}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
