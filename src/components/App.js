@@ -18,9 +18,9 @@ import { styles } from "./AppStyle";
 import { connect } from "react-redux";
 import { toggleMenu } from "../redux/actions";
 
-class App extends React.Component {
+class App extends React.PureComponent {
   render() {
-    const { classes, toggleMenu } = this.props;
+    const { classes, isMenuOpen, toggleMenu } = this.props;
 
     return (
       <div className={classes.root}>
@@ -33,20 +33,17 @@ class App extends React.Component {
           position="absolute"
           className={classNames(
             classes.appBar,
-            this.props.isMenuOpen && classes.appBarShift
+            isMenuOpen && classes.appBarShift
           )}
         >
-          <Toolbar
-            disableGutters={!this.props.isMenuOpen}
-            className={classes.toolbar}
-          >
+          <Toolbar disableGutters={!isMenuOpen} className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={toggleMenu}
               className={classNames(
                 classes.menuButton,
-                this.props.isMenuOpen && classes.menuButtonHidden
+                isMenuOpen && classes.menuButtonHidden
               )}
             >
               <MenuIcon />
@@ -67,10 +64,10 @@ class App extends React.Component {
           classes={{
             paper: classNames(
               classes.drawerPaper,
-              !this.props.isMenuOpen && classes.drawerPaperClose
+              !isMenuOpen && classes.drawerPaperClose
             )
           }}
-          open={this.props.isMenuOpen}
+          open={isMenuOpen}
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={toggleMenu}>
@@ -89,7 +86,9 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
