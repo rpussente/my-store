@@ -16,7 +16,7 @@ import { mainListItems } from "./listItems";
 import { styles } from "./AppStyle";
 
 import { connect } from "react-redux";
-import { toggleMenu } from "./redux/actions";
+import { toggleMenu } from "../redux/actions";
 
 class App extends React.Component {
   handleDrawerToggle = () => {
